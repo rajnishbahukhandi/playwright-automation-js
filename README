@@ -1,0 +1,157 @@
+# Playwright Automation JS
+
+A Playwright automation testing project using **JavaScript** for web UI and end-to-end (E2E) testing.
+
+## 📌 Project Overview
+
+This repository contains automated test cases developed using **Playwright with JavaScript**. The project is created for learning, practicing, and building practical automation testing skills.
+
+## 🛠️ Tech Stack
+
+* **Language:** JavaScript
+* **Automation Tool:** Playwright
+* **Runtime:** Node.js
+* **Test Runner:** Playwright Test
+* **IDE:** Visual Studio Code
+* **Version Control:** Git & GitHub
+
+## 📂 Project Structure
+
+```text
+playwright-automation-js/
+│
+├── tests/
+│   ├── login.spec.js
+│   ├── products.spec.js
+│   └── ...
+│
+├── playwright.config.js
+├── package.json
+├── package-lock.json
+└── README.md
+```
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/<your-username>/playwright-automation-js.git
+```
+
+### 2. Navigate to the Project
+
+```bash
+cd playwright-automation-js
+```
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+### 4. Install Playwright Browsers
+
+```bash
+npx playwright install
+```
+
+## ▶️ Run Tests
+
+Run all Playwright tests:
+
+```bash
+npx playwright test
+```
+
+Run tests with browser visible:
+
+```bash
+npx playwright test --headed
+```
+
+Run a specific test file:
+
+```bash
+npx playwright test tests/login.spec.js
+```
+
+Run tests in debug mode:
+
+```bash
+npx playwright test --debug
+```
+
+## 📊 View Test Report
+
+After test execution:
+
+```bash
+npx playwright show-report
+```
+
+## 🧪 Testing Areas
+
+The project covers practical Playwright automation concepts such as:
+
+* Web UI automation
+* Login testing
+* Product selection
+* Cart validation
+* Form handling
+* Locators
+* Assertions
+* Browser and page handling
+* Wait mechanisms
+* Multiple elements handling
+* Test hooks
+* Screenshots
+* Trace viewer
+* Data-driven testing
+* End-to-end testing
+
+## 🔍 Example Test
+
+```javascript
+import { test, expect } from '@playwright/test';
+
+test('Verify page title', async ({ page }) => {
+    await page.goto('https://example.com');
+
+    await expect(page).toHaveTitle(/Example/);
+});
+```
+
+## 📸 Reports & Debugging
+
+Playwright provides useful debugging features including:
+
+* HTML reports
+* Screenshots
+* Videos
+* Traces
+* Debug mode
+
+These features help identify and troubleshoot automation failures.
+
+## 🎯 Project Goals
+
+The main objectives of this project are:
+
+1. Learn Playwright automation using JavaScript.
+2. Understand Playwright locators and assertions.
+3. Build reusable automation scripts.
+4. Practice real-world E2E testing scenarios.
+5. Develop a maintainable automation framework.
+6. Improve automation testing skills for QA roles.
+
+## 👨‍💻 Author
+
+**Rajnish Bahukhandi**
+
+QA Engineer | Manual Testing | API Testing | Playwright | JavaScript
+
+---
+
+⭐ If you find this project useful, feel free to star the repository.
