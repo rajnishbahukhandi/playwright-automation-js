@@ -37,11 +37,12 @@ playwright-automation-js/
 ```
 
 README.md              → Project overview + setup + how to run tests
-docs/CODEGEN.md        → Codegen notes
+docs/CODEGEN.md        → Codegen notes (record and playback script)
 docs/LOCATORS.md       → Locator notes
 docs/ASSERTIONS.md     → Assertions
 docs/REPORTING.md      → Reports, screenshots, traces
 docs/API-TESTING.md    → API testing
+docs/DEBUG.md          → Debug flag notes (check locator at runtime)
 
 ## 🚀 Getting Started
 
