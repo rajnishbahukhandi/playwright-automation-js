@@ -24,12 +24,24 @@ playwright-automation-js/
 │   ├── login.spec.js
 │   ├── products.spec.js
 │   └── ...
-│
+│── docs/
+│   ├── CODEGEN.md
+│   ├── LOCATORS.md
+│   ├── ASSERTIONS.md
+│   └── REPORTING.md
+|
 ├── playwright.config.js
 ├── package.json
 ├── package-lock.json
 └── README.md
 ```
+
+README.md              → Project overview + setup + how to run tests
+docs/CODEGEN.md        → Codegen notes
+docs/LOCATORS.md       → Locator notes
+docs/ASSERTIONS.md     → Assertions
+docs/REPORTING.md      → Reports, screenshots, traces
+docs/API-TESTING.md    → API testing
 
 ## 🚀 Getting Started
 

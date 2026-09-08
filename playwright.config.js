@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { trace } from 'node:console';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -15,14 +16,17 @@ const config=({
     timeout: 10000,
   },
   reporter: 'html',
+
   use: {
     browserName: 'chromium',
-    // browserName: 'firefox',
-    // browserName: 'webkit',
+    //browserName: 'firefox',
+    //browserName: 'webkit',
     headless: false,
+    screenshot: 'on', // Capture screenshots for the test.
+    trace: 'retain-on-failure',  // Retain detailed trace of the test execution with complete log for debugging, only when test fails.
   },
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+  /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 
 });
 module.exports= config
