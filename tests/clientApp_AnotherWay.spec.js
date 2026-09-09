@@ -4,21 +4,23 @@ test('Client App end to end test',async({page})=>{
     await page.goto("https://rahulshettyacademy.com/client");
     
     //Elements
-    const loginUser = page.locator("#userEmail");
-    const loginPassword = page.locator('#userPassword');
-    const loginBtn = page.locator('#login');
-    const loading = page.waitForLoadState('networkidle'); // Network request to complete
-    const title = page.locator('.card-body b'); // Name of a prodeuct
+    const loginUser = page.getByPlaceholder("email@example.com");
+    const loginPassword = page.getByPlaceholder('enter your passsword');
+    const loginBtn = page.getByRole("button",{name:'Login'});
+    const loadingPage = page.waitForLoadState('networkidle'); // Network request to complete
     const productsAvailableOnPage = page.locator('.card-body'); // All infomation of product
-    const cart = page.locator('button[routerlink="/dashboard/cart"]');
-    const checkout = page.locator('text=Checkout');
+    const title = page.locator('.card-body b'); // Name of a prodeuct
+    const productTextOnCartPage = page.getByText("ADIDAS ORIGINAL");
+    const checkout = page.getByRole("button",{name:'Checkout'});
+
     const creditCardNumber = page.locator('[value="4542 9931 9292 2293"]');
     const cvv = page.locator('[class="input txt"]').nth(0);
     const nameOnCard = page.locator('[class="input txt"]').nth(1);
     const applyName = page.locator('.field.small [name="coupon"]');
-    const applyCouponBtn = page.locator('.field.small [type="submit"]');
+    const applyCouponBtn = page.getByRole('button',{name:"Apply Coupon"});
     const couponText = page.locator('.field.small p');
-    const selectCountry = page.locator('input[placeholder="Select Country"]');
+
+    const selectCountry = page.getByPlaceholder('Select Country');
     const placeOrder = page.locator('.btnn.action__submit.ng-star-inserted');
     const thankyou = page.locator('.hero-primary');
     const orderId = page.locator('.em-spacer-1 .ng-star-inserted');
@@ -29,7 +31,6 @@ test('Client App end to end test',async({page})=>{
 
     let loginEmail = "rajnish1785398053843@gmail.com";
     let loginPass = "Test@12345";
-    let productName = "iphone 13 pro";
     let creditCard = "4000002500001001";
     let creditCVV = "881";
     let creditName = "Rajnish";
@@ -39,32 +40,50 @@ test('Client App end to end test',async({page})=>{
     await loginUser.fill(loginEmail);
     await loginPassword.fill(loginPass);
     await loginBtn.click();
-    await loading;
+    await loadingPage;
     await productsAvailableOnPage.first().waitFor();
     console.log(await title.allTextContents());
-    const count = await productsAvailableOnPage.count();
+    await productsAvailableOnPage.filter({hasText:'ADIDAS ORIGINAL'}).getByRole('button',{name:" Add To Cart"}).click();
+    await page.getByRole("listitem").getByRole('button',{name:'  Cart '}).click();
+    await expect(productTextOnCartPage).toBeVisible();
+    await checkout.click();
+    await creditCardNumber.fill(creditCard);
+    await cvv.fill(creditCVV);
+    await nameOnCard.fill(creditName); // Types instantly
+    await applyName.fill(coupon);
+    await applyCouponBtn.click();
+    await selectCountry.pressSequentially("ind",{ delay: 100 }); // Types slower, like a user
+    await page.getByRole("button",{name:"Ind"}).click();
+
+
+
+
+
+    //-----------------------
+
+ /*    const count = await productsAvailableOnPage.count();
     for (let i = 0; i < count; i++) {
-        /**Match product in list.
-         * Get the product name from the current product card and compare it with the expected product.*/
+        //Match product in list.
+        //Get the product name from the current product card and compare it with the expected product.
         if (await productsAvailableOnPage.nth(i).locator("b").textContent() === productName) // use tag as locator("b").
             {
             // Print the matched product name in the console.
             console.log(await productsAvailableOnPage.nth(i).locator("b").textContent());
-            /**Add the product into cart.
-            * Click the "Add To Cart" button for the matched product.*/
+            //Add the product into cart.
+            //Click the "Add To Cart" button for the matched product.
             await productsAvailableOnPage.nth(i).locator("text=Add To Cart").click();
             // Exit the loop after adding the required product to the cart.
             break;
         }
-    }
+    } */
 
-    await cart.click();
+/*     await cart.click();
     await page.locator("div li").first().waitFor();
-    /** how to wait if the method what we are searching is not eligible for auto wait.
-    then, how to wait untill the page is fully loaded. Need to select some items which will comfirm you that
-    if they are loaded.*/
-    const isProductVisible = await page.locator("h3:has-text('iphone 13 pro')").isVisible(); // find locator base upon text and with a tag.
-    expect(isProductVisible).toBeTruthy();
+    //how to wait if the method what we are searching is not eligible for auto wait.
+    //then, how to wait untill the page is fully loaded. Need to select some items which will comfirm you that
+    //if they are loaded.
+    const bool = await page.locator("h3:has-text('iphone 13 pro')").isVisible(); // find locator base upon text and with a tag.
+    expect(bool).toBeTruthy();
     await checkout.click();
     await creditCardNumber.fill(creditCard);
     await cvv.fill(creditCVV);
@@ -86,10 +105,10 @@ test('Client App end to end test',async({page})=>{
             await dropdown.locator("button").nth(i).click();
             break;
         }
-    }
+    } */
 
     // await selectCountry.press("Enter");
-    await placeOrder.click();
+/*     await placeOrder.click();
     const thanyouText = await thankyou.textContent();
     console.log(thanyouText);
     await expect(thanyouText).toContain(" Thankyou for the order. ");
@@ -99,6 +118,8 @@ test('Client App end to end test',async({page})=>{
     console.log(ExtractOrderId); // Extract only the Order ID
     await ordersBtn.click();
     await orderIDs.first().waitFor();
+     */
+
     /**waitFor() expects the locator to resolve to a single element, but:
      * matches 8 elements, so Playwright throws a strict mode violation.
      * (Recommended): Wait for the first element*/
@@ -115,7 +136,7 @@ test('Client App end to end test',async({page})=>{
      *  activity, because some modern websites continuously make background requests, so "networkidle" may be slow or never occur.
      */
     
-    const ArrayorderList = await orderIDs.allTextContents();
+/*     const ArrayorderList = await orderIDs.allTextContents();
     console.log(ArrayorderList);
     const counts = await orderIDs.count();
     console.log(counts);
@@ -131,5 +152,6 @@ test('Client App end to end test',async({page})=>{
         break;
     }
     
-    await page.pause();
-});
+    await page.pause();*/
+}); 
+
