@@ -3,7 +3,7 @@ const{test, expect} = require('@playwright/test');
 test('Client App end to end test',async({page})=>{
     await page.goto("https://rahulshettyacademy.com/client");
     
-    //Elements
+    //Elements: User Facing Locators
     const loginUser = page.getByPlaceholder("email@example.com");
     const loginPassword = page.getByPlaceholder('enter your passsword');
     const loginBtn = page.getByRole("button",{name:'Login'});
