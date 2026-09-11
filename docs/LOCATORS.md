@@ -227,6 +227,59 @@ page.locator('#loginButton');
 
 if the role-based locator is available and uniquely identifies the element.
 
+
+## Using `getByRole()` with Textbox
+
+Use `getByRole('textbox')` when the input field has an accessible role of **textbox**.
+
+```javascript
+const selectCountry = page.getByRole('textbox', { name: 'Select Country' });
+
+await selectCountry.click();
+
+await selectCountry.pressSequentially('ind', { delay: 200 });
+
+await page.getByRole('button', { name: 'India' }).nth(1).click();
+
+await page.getByText('Place Order').click();
+```
+
+### Explanation
+
+```javascript
+page.getByRole('textbox', { name: 'Select Country' })
+```
+
+* `textbox` identifies the element by its accessible role.
+* `name: 'Select Country'` identifies the textbox using its accessible name.
+* The locator is stored in `selectCountry` so it can be reused for multiple actions.
+
+```javascript
+await selectCountry.click();
+```
+
+Clicks the **Select Country** textbox.
+
+```javascript
+await selectCountry.pressSequentially('ind', { delay: 200 });
+```
+
+Types `ind` into the textbox sequentially, with a 200 ms delay between characters.
+
+This is useful for autocomplete fields where typing triggers suggestions.
+
+```javascript
+await page.getByRole('button', { name: 'India' }).nth(1).click();
+```
+
+Finds the **India** button and selects the second matching element using `.nth(1)`.
+
+```javascript
+await page.getByText('Place Order').click();
+```
+
+Finds the visible **Place Order** text and clicks it.
+
 ### Key Principle
 
 **Choose locators that are readable, stable, and uniquely identify the intended element.**
