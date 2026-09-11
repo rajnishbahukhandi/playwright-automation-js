@@ -3,7 +3,7 @@ const{test, expect} = require('@playwright/test');
 test('Client App end to end test',async({page})=>{
     await page.goto("https://rahulshettyacademy.com/client");
     
-    //Elements
+    //Elements: CSS/DOM based Locators
     const loginUser = page.locator("#userEmail");
     const loginPassword = page.locator('#userPassword');
     const loginBtn = page.locator('#login');
