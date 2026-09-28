@@ -48,5 +48,12 @@ test("Popup validations", async({page})=>{
     await page.locator('#mousehover').hover();
     await page.getByRole('link',{name: 'Reload'}).click();
 
+    //Switch to the frame
+    const framespage = page.frameLocator('#courses-iframe');
+    await framespage.locator("li a[href*='lifetime-access']:visible").click();
+    const textcheck = await framespage.locator(".text h2").textContent();
+    console.log(textcheck.split(" ")[1]);
+    // Join 1355 Happy Subscibers! : all are split with space and grabe the element with array indexing.
+
     await page.pause();
 })
